@@ -11,7 +11,7 @@ button,input,textarea,select{font:inherit}.app{max-width:1280px;margin:auto;padd
 .grid{display:grid;grid-template-columns:360px 1fr;gap:16px}.card{background:rgba(13,32,58,.96);border:1px solid var(--line);border-radius:18px;overflow:hidden}.preview{padding:14px;position:sticky;top:12px;height:max-content}.phone{width:270px;aspect-ratio:9/16;margin:auto;background:#02101f;border-radius:18px;overflow:hidden;position:relative}.phone canvas{width:100%;height:100%}.empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted);background:linear-gradient(#102d52,#07172b)}
 .section{padding:18px;border-bottom:1px solid var(--line)}.section:last-child{border-bottom:0}.section h2{font-size:15px;margin:0 0 12px}.upload{display:block;border:1.5px dashed #397ec5;border-radius:14px;padding:18px;text-align:center;background:#0d2b4d;cursor:pointer}.upload input{display:none}.upload span{display:inline-block;margin-top:10px;background:#17395f;padding:9px 12px;border-radius:10px}.info{font-size:12px;color:var(--muted);margin-top:9px}
 .templates{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.template{border:1px solid var(--line);background:#112845;color:#fff;border-radius:12px;padding:10px;text-align:left}.template.active{outline:2px solid var(--blue)}.thumb{height:70px;border-radius:8px;margin-bottom:7px;display:flex;align-items:flex-end;padding:8px;font-weight:900;font-size:10px}.t1{background:linear-gradient(#1a70bd,#0c223f)}.t2{background:linear-gradient(#9f1820,#2b090b)}.t3{background:linear-gradient(#2182dc,#09203f)}.t4{background:linear-gradient(135deg,#071a31 0 45%,#b42028 46% 52%,#0b315e 53%)}.t5{background:radial-gradient(circle,#5ba1e4,#07172b)}.t6{background:linear-gradient(155deg,#09244a 0 40%,#1174d2 41% 62%,#071428 63%)}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:11px;color:#c6d5e7}.field input,.field textarea,.field select{background:#071a31;border:1px solid var(--line);border-radius:10px;color:#fff;padding:10px;outline:none}.field textarea{min-height:90px;resize:vertical}.caption textarea{min-height:210px}.btn{border:0;border-radius:10px;padding:11px 12px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(135deg,#1687ff,#0065d9);color:#fff}.secondary{background:#17324f;color:#fff;border:1px solid var(--line)}.green{background:#19a96b;color:#fff}.row{display:flex;gap:9px;flex-wrap:wrap}.row .btn{flex:1}.timeline{margin-top:12px}.timeline input{width:100%}.status{font-size:12px;color:var(--muted);margin-top:8px}.result{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}.toast{position:fixed;right:18px;bottom:18px;background:#0e2745;border:1px solid var(--line);padding:11px 14px;border-radius:10px;opacity:0;transition:.2s}.toast.show{opacity:1}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:11px;color:#c6d5e7}.field input,.field textarea,.field select{background:#071a31;border:1px solid var(--line);border-radius:10px;color:#fff;padding:10px;outline:none}.field textarea{min-height:90px;resize:vertical}.caption textarea{min-height:210px}.btn{border:0;border-radius:10px;padding:11px 12px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(135deg,#1687ff,#0065d9);color:#fff}.secondary{background:#17324f;color:#fff;border:1px solid var(--line)}.green{background:#19a96b;color:#fff}.row{display:flex;gap:9px;flex-wrap:wrap}.row .btn{flex:1}.timeline{margin-top:12px}.timeline input{width:100%}.status{font-size:12px;color:var(--muted);margin-top:8px}.result{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}.source-tabs{display:flex;gap:9px;flex-wrap:wrap}.source-tabs>*{flex:1}.source-btn{display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px}.source-btn input{display:none}.check{display:flex;gap:9px;align-items:flex-start;margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#081c34;color:#dce9f7;font-size:12px}.check input{margin-top:2px}.toast{position:fixed;right:18px;bottom:18px;background:#0e2745;border:1px solid var(--line);padding:11px 14px;border-radius:10px;opacity:0;transition:.2s}.toast.show{opacity:1}
 @media(max-width:900px){.grid{grid-template-columns:1fr}.preview{position:relative}.fields{grid-template-columns:1fr}.templates{grid-template-columns:repeat(2,1fr)}.result{grid-template-columns:1fr}}
 </style>
 </head>
@@ -51,7 +51,23 @@ button,input,textarea,select{font:inherit}.app{max-width:1280px;margin:auto;padd
       </section>
 
       <section class="section">
-        <h2>2. Modelo de capa</h2>
+        <h2>2. Imagem da capa</h2>
+        <div class="source-tabs">
+          <button id="useFrame" class="btn primary source-btn">Usar frame do vídeo</button>
+          <label id="coverUploadLabel" class="btn secondary source-btn">
+            ↑ Enviar capa externa
+            <input id="coverInput" type="file" accept="image/jpeg,image/png,image/webp">
+          </label>
+        </div>
+        <div class="info" id="coverInfo">Você pode usar um frame do vídeo ou subir uma capa pronta em JPG, PNG ou WebP.</div>
+        <label class="check">
+          <input id="exactCover" type="checkbox" disabled>
+          <span><strong>Usar exatamente como enviada</strong><br>Não aplica modelo, título, subtítulo ou elementos BGN sobre a capa externa.</span>
+        </label>
+      </section>
+
+      <section class="section">
+        <h2>3. Modelo de capa</h2>
         <div class="templates">
           <button class="template active" data-template="padrao"><div class="thumb t1">BGN PADRÃO</div>Padrão</button>
           <button class="template" data-template="urgente"><div class="thumb t2">BGN URGENTE</div>Urgente</button>
@@ -63,7 +79,7 @@ button,input,textarea,select{font:inherit}.app{max-width:1280px;margin:auto;padd
       </section>
 
       <section class="section">
-        <h2>3. Texto da capa</h2>
+        <h2>4. Texto da capa</h2>
         <div class="fields">
           <div class="field"><label>Título</label><input id="title" maxlength="90" placeholder="Digite a manchete"></div>
           <div class="field"><label>Categoria</label><select id="category"><option>NOTÍCIAS</option><option>BRASÍLIA</option><option>POLÍTICA</option><option>BRASIL</option><option>MUNDO</option><option>GOSPEL</option><option>ESPORTES</option><option>ECONOMIA</option><option>ENTRETENIMENTO</option></select></div>
@@ -72,14 +88,14 @@ button,input,textarea,select{font:inherit}.app{max-width:1280px;margin:auto;padd
       </section>
 
       <section class="section">
-        <h2>4. IA para legenda</h2>
+        <h2>5. IA para legenda</h2>
         <div class="field"><label>Informações complementares</label><textarea id="context" placeholder="Ex.: local, data, contexto que não aparece claramente no vídeo."></textarea></div>
         <button id="aiBtn" class="btn primary" style="margin-top:10px" disabled>✨ Gerar título, subtítulo e legenda com IA</button>
         <div class="status" id="aiStatus">Envie um vídeo para habilitar a análise.</div>
       </section>
 
       <section class="section caption">
-        <h2>5. Legenda do Instagram</h2>
+        <h2>6. Legenda do Instagram</h2>
         <div class="field"><textarea id="caption" placeholder="A legenda gerada pela IA aparecerá aqui. Você também pode editar manualmente."></textarea></div>
         <div class="row" style="margin-top:10px">
           <button id="copyCaption" class="btn green">📋 Copiar legenda</button>
@@ -87,7 +103,7 @@ button,input,textarea,select{font:inherit}.app{max-width:1280px;margin:auto;padd
       </section>
 
       <section class="section">
-        <h2>6. Finalizar</h2>
+        <h2>7. Finalizar</h2>
         <div class="result">
           <button id="downloadVideo2" class="btn secondary" disabled>↓ Baixar vídeo</button>
           <button id="downloadCover2" class="btn primary" disabled>↓ Baixar capa</button>
@@ -104,19 +120,25 @@ button,input,textarea,select{font:inherit}.app{max-width:1280px;margin:auto;padd
 const API_BASE="__BGN_PUBLIC_BASE_URL__";
 const $=id=>document.getElementById(id);
 const canvas=$("cover"),ctx=canvas.getContext("2d"),video=$("video");
-let file=null,url=null,template="padrao";
+let file=null,url=null,template="padrao",coverSource="frame",coverImage=null,coverFile=null;
 const colors={navy:"#041a36",blue:"#0878df",red:"#e3262d"};
 
 function toast(t){$("toast").textContent=t;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),1700)}
 function bytes(n){return n<1024*1024?(n/1024).toFixed(0)+" KB":(n/1024/1024).toFixed(1)+" MB"}
 function fmt(s){s=Number.isFinite(s)?s:0;return String(Math.floor(s/60)).padStart(2,"0")+":"+String(Math.floor(s%60)).padStart(2,"0")}
-function fit(){const w=video.videoWidth||1080,h=video.videoHeight||1920,r=Math.max(1080/w,1920/h),dw=w*r,dh=h*r;return{x:(1080-dw)/2,y:(1920-dh)/2,w:dw,h:dh}}
+function fitDims(w,h,mode="cover"){const r=mode==="contain"?Math.min(1080/w,1920/h):Math.max(1080/w,1920/h),dw=w*r,dh=h*r;return{x:(1080-dw)/2,y:(1920-dh)/2,w:dw,h:dh}}\nfunction fit(){return fitDims(video.videoWidth||1080,video.videoHeight||1920)}
 function wrap(text,max,fs){ctx.font="900 "+fs+"px Arial";const words=(text||"").split(/\s+/),lines=[];let line="";for(const word of words){const test=(line+" "+word).trim();if(ctx.measureText(test).width>max&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);return lines.slice(0,3)}
 function logo(){ctx.save();ctx.fillStyle="#fff";ctx.font="900 72px Arial";ctx.fillText("BGN",70,175);ctx.font="700 24px Arial";ctx.fillText("PORTAL",220,173);ctx.fillStyle=colors.red;[220,246,272].forEach(x=>ctx.fillRect(x,185,18,18));ctx.restore()}
 function tag(text,x,y,bg){ctx.font="800 25px Arial";const w=ctx.measureText(text).width+42;ctx.fillStyle=bg;ctx.fillRect(x,y,w,48);ctx.fillStyle="#fff";ctx.fillText(text,x+21,y+33)}
 function draw(){
   ctx.clearRect(0,0,1080,1920);
-  if(file&&video.readyState>=2){const f=fit();try{ctx.drawImage(video,f.x,f.y,f.w,f.h)}catch{}}
+  if(coverSource==="custom"&&coverImage){
+    const exact=$("exactCover").checked;
+    if(exact)ctx.fillStyle="#000",ctx.fillRect(0,0,1080,1920);
+    const f=fitDims(coverImage.naturalWidth||1080,coverImage.naturalHeight||1920,exact?"contain":"cover");
+    try{ctx.drawImage(coverImage,f.x,f.y,f.w,f.h)}catch{}
+    if(exact)return;
+  } else if(file&&video.readyState>=2){const f=fit();try{ctx.drawImage(video,f.x,f.y,f.w,f.h)}catch{}}
   else{const g=ctx.createLinearGradient(0,0,0,1920);g.addColorStop(0,"#166fc0");g.addColorStop(1,"#06162b");ctx.fillStyle=g;ctx.fillRect(0,0,1080,1920)}
   if(template==="urgente"){ctx.fillStyle="rgba(90,0,0,.34)";ctx.fillRect(0,0,1080,1920)}
   if(template==="politica"){ctx.fillStyle="rgba(3,15,35,.22)";ctx.fillRect(0,0,1080,1920);ctx.fillStyle=colors.red;ctx.fillRect(0,0,22,1920)}
@@ -130,20 +152,57 @@ function draw(){
   const sub=$("subtitle").value||"Subtítulo da notícia aparece aqui.";ctx.font="500 37px Arial";ctx.fillStyle="#dbe9f7";for(const l of wrap(sub,920,37)){ctx.fillText(l,70,y+28);y+=49}
   ctx.fillStyle=template==="urgente"?colors.red:"#fff";ctx.fillRect(70,1780,180,8)
 }
+function updateCoverActions(){
+  const canCover=!!(file||coverImage);
+  ["downloadCover","downloadCover2"].forEach(id=>$(id).disabled=!canCover);
+  $("empty").style.display=canCover?"none":"grid";
+}
+function selectFrameSource(){
+  if(!file)return toast("Envie um vídeo primeiro.");
+  coverSource="frame";
+  $("useFrame").className="btn primary source-btn";
+  $("coverUploadLabel").className="btn secondary source-btn";
+  $("timeline").style.display="block";
+  draw();
+}
+function setCustomCover(f){
+  if(!f||!f.type.startsWith("image/"))return toast("Selecione uma imagem JPG, PNG ou WebP.");
+  coverFile=f;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const img=new Image();
+    img.onload=()=>{
+      coverImage=img;coverSource="custom";
+      $("coverInfo").textContent=f.name+" • "+bytes(f.size);
+      $("exactCover").disabled=false;
+      $("exactCover").checked=true;
+      $("useFrame").className="btn secondary source-btn";
+      $("coverUploadLabel").className="btn primary source-btn";
+      $("timeline").style.display="none";
+      updateCoverActions();draw();toast("Capa externa carregada");
+    };
+    img.src=reader.result;
+  };
+  reader.readAsDataURL(f);
+}
 function setFile(f){
   if(!f||!f.type.startsWith("video/"))return toast("Selecione um vídeo válido.");
-  if(url)URL.revokeObjectURL(url);file=f;url=URL.createObjectURL(f);video.src=url;$("fileInfo").textContent=f.name+" • "+bytes(f.size);$("empty").style.display="none";
-  ["downloadVideo","downloadVideo2","downloadCover","downloadCover2","aiBtn"].forEach(id=>$(id).disabled=false);
-  video.onloadedmetadata=()=>{$("timeline").style.display="block";$("frame").max=video.duration;$("frame").value=Math.min(video.duration*.12,1);video.currentTime=+$("frame").value;$("time").textContent=fmt(video.currentTime)+" / "+fmt(video.duration)}
+  if(url)URL.revokeObjectURL(url);file=f;url=URL.createObjectURL(f);video.src=url;$("fileInfo").textContent=f.name+" • "+bytes(f.size);
+  ["downloadVideo","downloadVideo2","aiBtn"].forEach(id=>$(id).disabled=false);
+  updateCoverActions();
+  video.onloadedmetadata=()=>{if(coverSource==="frame")$("timeline").style.display="block";$("frame").max=video.duration;$("frame").value=Math.min(video.duration*.12,1);video.currentTime=+$("frame").value;$("time").textContent=fmt(video.currentTime)+" / "+fmt(video.duration)}
   video.onseeked=draw;video.onloadeddata=draw;
 }
 $("videoInput").addEventListener("change",e=>setFile(e.target.files[0]));
+$("coverInput").addEventListener("change",e=>setCustomCover(e.target.files[0]));
+$("useFrame").addEventListener("click",selectFrameSource);
+$("exactCover").addEventListener("change",draw);
 $("frame").addEventListener("input",e=>{video.currentTime=+e.target.value;$("time").textContent=fmt(video.currentTime)+" / "+fmt(video.duration)});
 document.querySelectorAll(".template").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".template").forEach(x=>x.classList.remove("active"));b.classList.add("active");template=b.dataset.template;draw()}));
 ["title","subtitle","category"].forEach(id=>$(id).addEventListener("input",draw));
 
 function downloadVideo(){if(!file)return;const a=document.createElement("a");a.href=url;a.download=file.name||"reels-bgn.mp4";a.click()}
-function downloadCover(){if(!file)return;draw();canvas.toBlob(blob=>{const a=document.createElement("a"),u=URL.createObjectURL(blob);a.href=u;a.download="capa-bgn.jpg";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)},"image/jpeg",.94)}
+function downloadCover(){if(!file&&!coverImage)return;draw();canvas.toBlob(blob=>{const a=document.createElement("a"),u=URL.createObjectURL(blob);a.href=u;a.download="capa-bgn.jpg";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)},"image/jpeg",.94)}
 async function copy(){const t=$("caption").value.trim();if(!t)return toast("A legenda está vazia.");try{await navigator.clipboard.writeText(t)}catch{$("caption").select();document.execCommand("copy")}toast("Legenda copiada")}
 ["downloadVideo","downloadVideo2"].forEach(id=>$(id).addEventListener("click",downloadVideo));
 ["downloadCover","downloadCover2"].forEach(id=>$(id).addEventListener("click",downloadCover));
